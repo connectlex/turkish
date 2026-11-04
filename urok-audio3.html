@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Аудирование из учебников Yeni Hitit, Yedi İklim и Lale Türkçe (Крупный шрифт)</title>
+    <style>
+        :root {
+            --bg-page: #0f172a;
+            --slide-bg: #ffffff;
+            --primary: #5b21b6;
+            --primary-light: #f3e8ff;
+            --primary-border: #d8b4fe;
+            --accent: #e11d48;
+            --teal: #0d9488;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-dark);
+            padding: 20px 15px;
+            font-size: 20px;
+            line-height: 1.5;
+        }
+
+        .presentation {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .slide {
+            background: var(--slide-bg);
+            border-radius: 16px;
+            padding: 26px 32px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            border-top: 7px solid var(--primary);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #cbd5e1;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+
+        .slide-badge {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 16px;
+            font-weight: 800;
+            padding: 5px 14px;
+            border-radius: 20px;
+        }
+
+        .slide-counter {
+            font-size: 16px;
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+
+        p {
+            font-size: 19px;
+            margin-bottom: 10px;
+        }
+
+        .audio-panel {
+            background: linear-gradient(135deg, #faf5ff 0%, var(--primary-light) 100%);
+            border: 2px solid var(--primary-border);
+            border-radius: 12px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .audio-title {
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 19px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .audio-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .audio-btn.slow { background: var(--teal); }
+        .audio-btn.stop { background: var(--accent); }
+
+        .listening-box {
+            background: #f8fafc;
+            border: 2px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 18px 22px;
+            font-size: 20.5px;
+            line-height: 1.95;
+            margin-bottom: 12px;
+        }
+
+        .task-input {
+            border: 2px solid var(--primary);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--primary);
+            width: 160px;
+            text-align: center;
+            outline: none;
+            background: #ffffff;
+            margin: 0 4px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 8px 0;
+        }
+
+        .question-card {
+            background: #ffffff;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-size: 18px;
+        }
+
+        .answer-spoiler {
+            margin-top: 10px;
+            background: #f1f5f9;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 18px;
+        }
+
+        .answer-spoiler summary {
+            cursor: pointer;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .answer-spoiler-content {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #94a3b8;
+            line-height: 1.55;
+        }
+
+        @page {
+            margin: 4mm 5mm;
+        }
+
+        @media print {
+            body {
+                background: #ffffff !important;
+                padding: 0 !important;
+                font-size: 19px !important;
+            }
+            .presentation {
+                display: block !important;
+                max-width: 100% !important;
+            }
+            .slide {
+                box-shadow: none !important;
+                border: 2px solid #94a3b8 !important;
+                border-top: 7px solid var(--primary) !important;
+                min-height: 192mm !important;
+                padding: 16px 20px !important;
+                page-break-after: always !important;
+                page-break-inside: avoid !important;
+            }
+            .slide:last-of-type {
+                page-break-after: auto !important;
+            }
+            .audio-panel, .answer-spoiler {
+                display: none !important;
+            }
+            .task-input {
+                border: none !important;
+                border-bottom: 2px solid #0f172a !important;
+                border-radius: 0 !important;
+                background: transparent !important;
+                color: transparent !important;
+            }
+            .task-input::placeholder {
+                color: transparent !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="presentation">
+
+    <!-- ТРЕК 1: По материалам YENİ HİTİT 1 (Ünite 2 - Yakın Çevremiz) -->
+    <div class="slide">
+        <div>
+            <div class="slide-header">
+                <span class="slide-badge">Из учебника Yeni Hitit 1 (Ankara TÖMER) • Ünite 2</span>
+                <span class="slide-counter">Страница 1 из 3</span>
+            </div>
+            <h2>Аудирование 1: «Yeni Ofisimiz» (Наш новый офис)</h2>
+            <p>Прослушайте диалог коллег в офисе и впишите услышанные слова (местный падеж, <em>var/yok, değil</em> и личные окончания):</p>
+        </div>
+
+        <div class="audio-panel">
+            <div class="audio-title">🔊 Трек 1 (Yeni Hitit 1 — Офис и рабочее место):</div>
+            <div class="btn-group">
+                <button class="audio-btn slow" onclick="speakHitit(1, 0.72)">🐢 Медленно (0.75x)</button>
+                <button class="audio-btn" onclick="speakHitit(1, 0.95)">▶️ Обычная скорость (1.0x)</button>
+                <button class="audio-btn stop" onclick="stopSpeech()">⏹ Стоп</button>
+            </div>
+        </div>
+
+        <div class="listening-box">
+            — Günaydın Selim Bey! Bugün <input type="text" class="task-input" placeholder="1. (в офисе)"> kimler var?<br>
+            — Günaydın! Bugün herkes burada, sadece müdür Bey <input type="text" class="task-input" placeholder="2. (в комнате)"> değil, o şimdi <input type="text" class="task-input" placeholder="3. (на совещании)">.<br>
+            — Peki yeni dosyalar <input type="text" class="task-input" placeholder="4. (у тебя)"> mi?<br>
+            — Hayır, dosyalar bende <input type="text" class="task-input" placeholder="5. (не)">, dosyalar <input type="text" class="task-input" placeholder="6. (в шкафу)">.<br>
+            — Sen bugün çok <input type="text" class="task-input" placeholder="7. (занят ли?)">?<br>
+            — Hayır, bugün çok meşgul <input type="text" class="task-input" placeholder="8. (я не...)">, <input type="text" class="task-input" placeholder="9. (я свободен)">!
+        </div>
+
+        <div class="grid-2">
+            <div class="question-card">
+                <strong>Вопрос 1:</strong> Müdür Bey şimdi nerede? — <input type="text" class="task-input" style="width: 240px;" placeholder="...">
+            </div>
+            <div class="question-card">
+                <strong>Вопрос 2:</strong> Yeni dosyalar Selim Bey'de mi? — <input type="text" class="task-input" style="width: 240px;" placeholder="...">
+            </div>
+        </div>
+
+        <details class="answer-spoiler">
+            <summary>🔑 Показать расшифровку и ключи (Yeni Hitit 1)</summary>
+            <div class="answer-spoiler-content">
+                1. <strong>ofiste</strong> | 2. <strong>odada</strong> | 3. <strong>toplantıda</strong> | 4. <strong>sende</strong> | 5. <strong>değil</strong> | 6. <strong>dolapta</strong> | 7. <strong>meşgul müsün</strong> | 8. <strong>değilim</strong> | 9. <strong>müsaitim</strong>.<br>
+                <strong>Ответы:</strong> 1. Müdür Bey şimdi toplantıda. | 2. Hayır, dosyalar onda değil, dolapta.
+            </div>
+        </details>
+    </div>
+
+    <!-- ТРЕК 2: По материалам YEDİ İKLİM A1 (Yunus Emre Enstitüsü - Ünite 2) -->
+    <div class="slide">
+        <div>
+            <div class="slide-header">
+                <span class="slide-badge">Из учебника Yedi İklim Türkçe A1 • Ünite 2</span>
+                <span class="slide-counter">Страница 2 из 3</span>
+            </div>
+            <h2>Аудирование 2: «Evimiz ve Bahçemiz» (Наш дом и сад)</h2>
+            <p>Прослушайте описание дома и впишите пропущенные формы:</p>
+        </div>
+
+        <div class="audio-panel">
+            <div class="audio-title">🔊 Трек 2 (Yedi İklim A1 — Дом, сад и уют):</div>
+            <div class="btn-group">
+                <button class="audio-btn slow" onclick="speakHitit(2, 0.72)">🐢 Медленно (0.75x)</button>
+                <button class="audio-btn" onclick="speakHitit(2, 0.95)">▶️ Обычная скорость (1.0x)</button>
+                <button class="audio-btn stop" onclick="stopSpeech()">⏹ Стоп</button>
+            </div>
+        </div>
+
+        <div class="listening-box">
+            Merhaba! Burası bizim evimiz. Evimiz şehir merkezinde <input type="text" class="task-input" placeholder="1. (не)">, ama çok sakin ve güzel bir <input type="text" class="task-input" placeholder="2. (на улице)">. 
+            Evde dört oda, büyük bir salon ve geniş bir mutfak <input type="text" class="task-input" placeholder="3. (есть)">. 
+            <input type="text" class="task-input" placeholder="4. (В гостиной)"> rahat koltuklar, büyük bir masa ve televizyon var. 
+            Evin önünde küçük bir bahçe var. <input type="text" class="task-input" placeholder="5. (В саду)"> renkli çiçekler ve ağaçlar var, ama havuz <input type="text" class="task-input" placeholder="6. (нет)">. 
+            Biz bu evde çok <input type="text" class="task-input" placeholder="7. (мы счастливы)">!
+        </div>
+
+        <div class="grid-2">
+            <div class="question-card">
+                <strong>Вопрос 1:</strong> Ev şehir merkezinde mi? — <input type="text" class="task-input" style="width: 240px;" placeholder="...">
+            </div>
+            <div class="question-card">
+                <strong>Вопрос 2:</strong> Bahçede havuz var mı? — <input type="text" class="task-input" style="width: 240px;" placeholder="...">
+            </div>
+        </div>
+
+        <details class="answer-spoiler">
+            <summary>🔑 Показать расшифровку и ключи (Yedi İklim A1)</summary>
+            <div class="answer-spoiler-content">
+                1. <strong>değil</strong> | 2. <strong>sokakta</strong> | 3. <strong>var</strong> | 4. <strong>Salonda</strong> | 5. <strong>Bahçede</strong> | 6. <strong>yok</strong> | 7. <strong>mutluyuz</strong>.<br>
+                <strong>Ответы:</strong> 1. Hayır, ev şehir merkezinde değil. | 2. Hayır, bahçede havuz yok, çiçekler ve ağaçlar var.
+            </div>
+        </details>
+    </div>
+
+    <!-- ТРЕК 3: По материалам LALE TÜRKÇE 1 (Спряжение существительных во всех 4 формах) -->
+    <div class="slide">
+        <div>
+            <div class="slide-header">
+                <span class="slide-badge">Из учебника Lale Türkçe 1 • İsim Cümleleri</span>
+                <span class="slide-counter">Страница 3 из 3</span>
+            </div>
+            <h2>Аудирование 3: «Tanışma ve Meslekler» (Вопросы и отрицательные вопросы)</h2>
+            <p>Прослушайте диалог знакомства и впишите услышанные формы сказуемого (+, -, ?, ?-):</p>
+        </div>
+
+        <div class="audio-panel">
+            <div class="audio-title">🔊 Трек 3 (Lale Türkçe 1 — Диалог о профессиях):</div>
+            <div class="btn-group">
+                <button class="audio-btn slow" onclick="speakHitit(3, 0.72)">🐢 Медленно (0.75x)</button>
+                <button class="audio-btn" onclick="speakHitit(3, 0.95)">▶️ Обычная скорость (1.0x)</button>
+                <button class="audio-btn stop" onclick="stopSpeech()">⏹ Стоп</button>
+            </div>
+        </div>
+
+        <div class="listening-box">
+            — Afedersiniz, siz bu şirkette <input type="text" class="task-input" style="width: 210px;" placeholder="1. (разве не директор?)">?<br>
+            — Hayır, ben müdür <input type="text" class="task-input" placeholder="2. (я не...)">, ben dış ticaret <input type="text" class="task-input" placeholder="3. (я специалист)">. Peki siz yeni <input type="text" class="task-input" style="width: 190px;" placeholder="4. (вы клиент?)">?<br>
+            — Evet! Bugün hava çok soğuk, siz <input type="text" class="task-input" style="width: 210px;" placeholder="5. (вы не устали?)">?<br>
+            — Hayır, hiç yorgun <input type="text" class="task-input" placeholder="6. (я не...)">. Buyurun, <input type="text" class="task-input" placeholder="7. (на кухне)"> taze çay ve sıcak kahve <input type="text" class="task-input" placeholder="8. (есть)">!
+        </div>
+
+        <details class="answer-spoiler">
+            <summary>🔑 Показать расшифровку и ключи (Lale Türkçe 1)</summary>
+            <div class="answer-spoiler-content">
+                1. <strong>müdür değil misiniz</strong> | 2. <strong>değilim</strong> | 3. <strong>uzmanıyım (uzmanım)</strong> | 4. <strong>müşteri misiniz</strong> | 5. <strong>yorgun değil misiniz</strong> | 6. <strong>değilim</strong> | 7. <strong>mutfakta</strong> | 8. <strong>var</strong>.
+            </div>
+        </details>
+    </div>
+
+</div>
+
+<script>
+    const hititTexts = {
+        1: "Günaydın Selim Bey! Bugün ofiste kimler var? Günaydın! Bugün herkes burada, sadece müdür Bey odada değil, o şimdi toplantıda. Peki yeni dosyalar sende mi? Hayır, dosyalar bende değil, dosyalar dolapta. Sen bugün çok meşgul müsün? Hayır, bugün çok meşgul değilim, müsaitim!",
+        2: "Merhaba! Burası bizim evimiz. Evimiz şehir merkezinde değil, ama çok sakin ve güzel bir sokakta. Evde dört oda, büyük bir salon ve geniş bir mutfak var. Salonda rahat koltuklar, büyük bir masa ve televizyon var. Evin önünde küçük bir bahçe var. Bahçede renkli çiçekler ve ağaçlar var, ama havuz yok. Biz bu evde çok mutluyuz!",
+        3: "Afedersiniz, siz bu şirkette müdür değil misiniz? Hayır, ben müdür değilim, ben dış ticaret uzmanıyım. Peki siz yeni müşteri misiniz? Evet! Bugün hava çok soğuk, siz yorgun değil misiniz? Hayır, hiç yorgun değilim. Buyurun, mutfakta taze çay ve sıcak kahve var!"
+    };
+
+    function speakHitit(id, rate) {
+        if (!('speechSynthesis' in window)) {
+            alert("Откройте файл в браузере Google Chrome или Microsoft Edge для включения озвучки.");
+            return;
+        }
+        window.speechSynthesis.cancel();
+        const msg = new SpeechSynthesisUtterance(hititTexts[id]);
+        msg.lang = 'tr-TR';
+        msg.rate = rate;
+        const voices = window.speechSynthesis.getVoices();
+        const trVoice = voices.find(v => v.lang.includes('tr') || v.lang.includes('TR'));
+        if (trVoice) msg.voice = trVoice;
+        window.speechSynthesis.speak(msg);
+    }
+
+    function stopSpeech() {
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    }
+
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+    }
+</script>
+
+</body>
+</html>
